@@ -1,9 +1,8 @@
 ---
 layout: page
-title: About
+title: 关于
 permalink: /about/
 ---
 
-Welcome to this website!
+客官,欢迎光临!
 
-> This website is using [laobubu](http://laobubu.net)'s theme: [EasyBook](https://github.com/laobubu/jekyll-theme-EasyBook)
