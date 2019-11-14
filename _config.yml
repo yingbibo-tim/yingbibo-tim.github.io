@@ -57,3 +57,7 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
   math_engine: mathjax
+  
+repository: github.com/yingbibo-tim/batcher.github.io
+github_url: github.com/yingbibo-tim
+url: https://github.com/yingbibo-tim
