@@ -18,35 +18,36 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 其实安装很简单,参考[pinpoint](https://naver.github.io/pinpoint/1.7.3/installation.html)傻瓜式操作下来就可以了
 ## Hbase下载安装
 - [Hbase 1.2.7下载地址](http://archive.apache.org/dist/hbase/1.2.7/)  
-- 下载完成后,解压,然后配置`conf/hbase-site.xml`文件,主要配置一个zk的地址和数据存储的地址,我这边配置是
-~~~xml
-<configuration>
-  <property>
-    <name>hbase.rootdir</name>
-    <value>file:/Users/yingbibo/java_tool/hbase-1.2.7/data</value>
-  </property>
-  <property>
-    <name>hbase.cluster.distributed</name>
-    <value>true</value>
-  </property>
-  <property>
-    <name>hbase.regionserver.handler.count</name>
-    <value>20</value>
-  </property>
-  <property>
-    <name>hbase.zookeeper.quorum</name>
-    <value>localhost</value>
-  </property>
-  <property>
-    <name>hbase.zookeeper.property.clientPort</name>
-    <value>2181</value>
-  </property>
-  <property>
-    <name>zookeeper.session.timeout</name>
-    <value>200000</value>
-  </property>
-</configuration>
-~~~
+- 下载完成后,解压,然后配置`conf/hbase-site.xml`文件,主要配置一个zk的地址和数据存储的地址,我这边配置是  
+  ~~~xml
+  <configuration>
+    <property>
+      <name>hbase.rootdir</name>
+      <value>file:/Users/yingbibo/java_tool/hbase-1.2.7/data</value>
+    </property>
+    <property>
+      <name>hbase.cluster.distributed</name>
+      <value>true</value>
+    </property>
+    <property>
+      <name>hbase.regionserver.handler.count</name>
+      <value>20</value>
+    </property>
+    <property>
+      <name>hbase.zookeeper.quorum</name>
+      <value>localhost</value>
+    </property>
+    <property>
+      <name>hbase.zookeeper.property.clientPort</name>
+      <value>2181</value>
+    </property>
+    <property>
+      <name>zookeeper.session.timeout</name>
+      <value>200000</value>
+    </property>
+  </configuration>
+  ~~~
+
 - 然后在/etc/profile 或者 ~.base_profile 下面添加habse的环境变量  
 `export HBASE_HOME=/Users/yingbibo/java_tool/hbase-1.2.7/hbase-1.2.7`  
 - 启动hbase, `./start-hbase.sh`  
@@ -55,12 +56,15 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 ## 部署Pinpoint-collector
 - [下载地址](https://github.com/naver/pinpoint/releases/tag/1.8.5),下载完成后,解压放到你自己需要放置的目录
 - 修改`WEB-INF⁩/lasses` 下面的 `hbase.properties`和 `pinpoint-collector.properties`
-  - ~~~
+  - 
+    ~~~
     #hbase.properties
     hbase.client.host=localhost
     hbase.client.port=2181
     ~~~
-  - ~~~
+
+  - 
+    ~~~
     #pinpoint-collector.properties
     ## 集群模式改成false
     cluster.enable=false 
@@ -69,6 +73,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
     cluster.listen.ip=
     cluster.listen.port=
     ~~~ 
+
   - 启动  
   我这边是使用config文件启动tomcat
     -  config-pinpoint-collector.conf
