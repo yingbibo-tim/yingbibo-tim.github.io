@@ -93,8 +93,25 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
           </Service>
         </Server>
         ```
+      然后启动 `./startup.sh -config /Users/yingbibo/java_tool/tomcatConfig/config-pinpoint-collector.conf`
 
+## 部署Pinpoint-web
+- [下载地址](https://github.com/naver/pinpoint/releases/tag/1.8.5),下载完成后,解压放到你自己需要放置的目录
 
+- 修改`WEB-INF⁩/lasses` 下面的 `hbase.properties`和 `pinpoint-collector.properties`,跟 collector修改方式一样
 
+- 配置config文件,启动tomcat
+
+- 访问对应的端口地址 `http://localhost:19998/`
+
+## Pinpoint-Agent使用
+
+- 我这里主要是jar启动模式,所以在启动前加上VM参数 `java -javaagent:pinpoint-bootstrap-1.8.5.jar -Dpinpoint.agentId=Test-001 -Dpinpoint.applicationName=Test -jar demo.jar`
+
+- 注意:如果发现pinpoint-web,可以抓取到应用的信息,但是没有相应的请求数据,则需要修改agent目录下面的`pinpoint.config`配置文件中的`profiler.springboot.bootstrap.main`去指定相应的main方法
+  ```
+  profiler.springboot.enable=true
+  profiler.springboot.bootstrap.main=org.springframework.boot.loader.JarLauncher, org.springframework.boot.loader.WarLauncher, org.springframework.boot.loader.PropertiesLauncher,com.tim.ying.hello.SpringbootHelloApplication
+  ```
 
 
