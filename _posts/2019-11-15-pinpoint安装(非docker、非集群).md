@@ -54,6 +54,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 - 添加相应的tables [hbase-create.hbase链接](https://github.com/naver/pinpoint/blob/master/hbase/scripts/hbase-create.hbase) `./hbase shell hbase-create.hbase`  
 - 可以在[http://localhost:16010/](http://localhost:16010/)查看相应的信息.
 ## 部署Pinpoint-collector
+
 - [下载地址](https://github.com/naver/pinpoint/releases/tag/1.8.5),下载完成后,解压放到你自己需要放置的目录
 - 修改`WEB-INF⁩/lasses` 下面的 `hbase.properties`和 `pinpoint-collector.properties`
   - 
@@ -61,10 +62,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
     #hbase.properties
     hbase.client.host=localhost
     hbase.client.port=2181
-    ~~~
-
-  - 
-    ~~~
+    
     #pinpoint-collector.properties
     ## 集群模式改成false
     cluster.enable=false 
@@ -79,24 +77,24 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
     -  config-pinpoint-collector.conf
        ~~~xml
           <?xml version='1.0' encoding='utf-8'?>
-        <Server port="19991" shutdown="SHUTDOWN">
-          <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
-          <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
-          <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
-          <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
-          <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+          <Server port="19991" shutdown="SHUTDOWN">
+            <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+            <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+            <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+            <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+            <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
-          <Service name="Catalina">
-            <Connector port="19992" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
-            <Connector port="19993" protocol="AJP/1.3" redirectPort="8443" />
-            <Engine name="Catalina" defaultHost="localhost">
-              <Host name="localhost" unpackWARs="false" autoDeploy="false">
-                <Context docBase="/Users/yingbibo/java_tool/pinpoint/pinpoint-collector-1.8.5" path="/" reloadable="false" />
-                <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/Users/yingbibo/java_tool/pinpoint/logs/" prefix="pinpoint-collector" suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-              </Host>
-            </Engine>
-          </Service>
-        </Server>
+            <Service name="Catalina">
+              <Connector port="19992" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+              <Connector port="19993" protocol="AJP/1.3" redirectPort="8443" />
+              <Engine name="Catalina" defaultHost="localhost">
+                <Host name="localhost" unpackWARs="false" autoDeploy="false">
+                  <Context docBase="/Users/yingbibo/java_tool/pinpoint/pinpoint-collector-1.8.5" path="/" reloadable="false" />
+                  <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/Users/yingbibo/java_tool/pinpoint/logs/" prefix="pinpoint-collector" suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+                </Host>
+              </Engine>
+            </Service>
+          </Server>
         ~~~
   然后启动 `./startup.sh -config /Users/yingbibo/java_tool/tomcatConfig/config-pinpoint-collector.conf`
 
