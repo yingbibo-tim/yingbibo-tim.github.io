@@ -19,7 +19,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 ## Hbase下载安装
 - [Hbase 1.2.7下载地址](http://archive.apache.org/dist/hbase/1.2.7/)  
 - 下载完成后,解压,然后配置`conf/hbase-site.xml`文件,主要配置一个zk的地址和数据存储的地址,我这边配置是  
-  ~~~xml
+  ~~~
   <configuration>
     <property>
       <name>hbase.rootdir</name>
