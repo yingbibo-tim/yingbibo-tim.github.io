@@ -19,7 +19,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 ## Hbase下载安装
 - [Hbase 1.2.7下载地址](http://archive.apache.org/dist/hbase/1.2.7/)  
 - 下载完成后,解压,然后配置`conf/hbase-site.xml`文件,主要配置一个zk的地址和数据存储的地址,我这边配置是
-```xml
+~~~xml
 <configuration>
   <property>
     <name>hbase.rootdir</name>
@@ -46,7 +46,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
     <value>200000</value>
   </property>
 </configuration>
-```
+~~~
 - 然后在/etc/profile 或者 ~.base_profile 下面添加habse的环境变量  
 `export HBASE_HOME=/Users/yingbibo/java_tool/hbase-1.2.7/hbase-1.2.7`  
 - 启动hbase, `./start-hbase.sh`  
@@ -55,12 +55,12 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 ## 部署Pinpoint-collector
 - [下载地址](https://github.com/naver/pinpoint/releases/tag/1.8.5),下载完成后,解压放到你自己需要放置的目录
 - 修改`WEB-INF⁩/lasses` 下面的 `hbase.properties`和 `pinpoint-collector.properties`
-  - ```
+  - ~~~
     #hbase.properties
     hbase.client.host=localhost
     hbase.client.port=2181
-    ```
-  - ```
+    ~~~
+  - ~~~
     #pinpoint-collector.properties
     ## 集群模式改成false
     cluster.enable=false 
@@ -68,11 +68,11 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
     cluster.zookeeper.sessiontimeout=30000
     cluster.listen.ip=
     cluster.listen.port=
-    ``` 
+    ~~~ 
   - 启动  
   我这边是使用config文件启动tomcat
     -  config-pinpoint-collector.conf
-       ```xml
+       ~~~xml
           <?xml version='1.0' encoding='utf-8'?>
         <Server port="19991" shutdown="SHUTDOWN">
           <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
@@ -92,7 +92,7 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
             </Engine>
           </Service>
         </Server>
-        ```
+        ~~~
       然后启动 `./startup.sh -config /Users/yingbibo/java_tool/tomcatConfig/config-pinpoint-collector.conf`
 
 ## 部署Pinpoint-web
@@ -109,9 +109,9 @@ pinpoint 主要有`HBase`、`pinpoint-collector`、`pinpoint-web`、`pinpoint-ag
 - 我这里主要是jar启动模式,所以在启动前加上VM参数 `java -javaagent:pinpoint-bootstrap-1.8.5.jar -Dpinpoint.agentId=Test-001 -Dpinpoint.applicationName=Test -jar demo.jar`
 
 - 注意:如果发现pinpoint-web,可以抓取到应用的信息,但是没有相应的请求数据,则需要修改agent目录下面的`pinpoint.config`配置文件中的`profiler.springboot.bootstrap.main`去指定相应的main方法
-  ```
+  ~~~
   profiler.springboot.enable=true
   profiler.springboot.bootstrap.main=org.springframework.boot.loader.JarLauncher, org.springframework.boot.loader.WarLauncher, org.springframework.boot.loader.PropertiesLauncher,com.tim.ying.hello.SpringbootHelloApplication
-  ```
+  ~~~
 
 
